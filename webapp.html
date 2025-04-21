@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Word Counter Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0 5pt;
+        display: flex;
+        flex-direction: column;
+        color: #333;
+    }
+
+    header {
+        width: 100%;
+        padding: 20px 0;
+        text-align: center;
+        font-family: "Cutive Mono", monospace;
+        margin-top: 0;
+    }
+
+    h2 {
+      margin-top: 0pt;
+      margin-bottom: 7pt;
+      font-size: 36pt;
+      color: #3e4437;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 12pt 0;
+      display: flex;
+      justify-content: space-around;
+      background-color: #404c24;
+      border-radius: 5pt;
+    }
+
+    nav li {
+      margin: 0;
+      padding: 0;
+      font-size: 20pt;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-family: "Cutive Mono", monospace;
+      padding: 0.5em 1em;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background-color: #3e4437;
+      border-radius: 5pt;
+    }
+
+    .container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 600px;
+        box-sizing: border-box;
+        margin: 12pt auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: "Cutive Mono", monospace;
+    }
+
+    textarea {
+      width: calc(100% - 20px);
+      height: 150px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      margin-bottom: 20px;
+      resize: none;
+      box-sizing: border-box;
+    }
+
+    .result {
+      text-align: center;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    .word-counts {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #555;
+    }
+
+    .word-counts p {
+      margin: 5px 0;
+    }
+
+    .word-counts .goal {
+      font-weight: bold;
+    }
+
+    .progress-container {
+      background-color: #ddd;
+      border-radius: 5px;
+      height: 12px;
+      margin-bottom: 12px;
+      width: 100%;
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      width: 0%;
+      transition: width 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Quinn's Webpage: Word Counter</h2>
+    <nav>
+      <ul>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="about.html">Embedded Items</a></li>
+        <li><a href="scratch.html">Scratch Page</a></li>
+        <li><a href="self-reference.html">Web App: Word Counter</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Word Counter Tool</h1>
+    <textarea id="textInput" placeholder="Start typing here..." oninput="countWords()"></textarea>
+    <div class="result">
+      <p>Word Count: <span id="wordCount">0</span></p>
+      <button class="button" onclick="clearText()">Clear</button>
+    </div>
+
+    <div class="word-counts">
+      <p class="goal">Common Word Count Goals:</p>
+
+      <p>500 words: <span id="remaining500">500</span> words left</p>
+      <div class="progress-container"><div class="progress-bar" id="progress500"></div></div>
+
+      <p>800 words: <span id="remaining800">800</span> words left</p>
+      <div class="progress-container"><div class="progress-bar" id="progress800"></div></div>
+
+      <p>1,000 words: <span id="remaining1000">1000</span> words left</p>
+      <div class="progress-container"><div class="progress-bar" id="progress1000"></div></div>
+
+      <p>1,500 words: <span id="remaining1500">1500</span> words left</p>
+      <div class="progress-container"><div class="progress-bar" id="progress1500"></div></div>
+    </div>
+  </div>
+
+  <script>
+    function countWords() {
+      const text = document.getElementById('textInput').value;
+      const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+      const wordCount = words.length;
+      document.getElementById('wordCount').textContent = wordCount;
+
+      updateGoal(500, wordCount, 'remaining500', 'progress500');
+      updateGoal(800, wordCount, 'remaining800', 'progress800');
+      updateGoal(1000, wordCount, 'remaining1000', 'progress1000');
+      updateGoal(1500, wordCount, 'remaining1500', 'progress1500');
+    }
+
+    function updateGoal(goal, count, remainingId, barId) {
+      const remaining = Math.max(0, goal - count);
+      const percent = Math.min(100, (count / goal) * 100);
+      document.getElementById(remainingId).textContent = remaining;
+      document.getElementById(barId).style.width = percent + '%';
+    }
+
+    function clearText() {
+      document.getElementById('textInput').value = '';
+      countWords();
+    }
+  </script>
+</body>
+</html>

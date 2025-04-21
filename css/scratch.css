@@ -1,0 +1,106 @@
+@font-face {
+    font-family: "lato"; src: url(../assets/fonts/lato.ttf)
+}
+@font-face {
+    font-family: "crimson"; src: url(../assets/fonts/crimson.ttf)
+}
+@font-face {
+    font-family: "cutivemono"; src: url(../assets/fonts/cutivemono.ttf)
+}
+:root {
+    --dark: #3e4437;
+    --medium: #404c24;
+    --light: #d4c9c1;
+    --accent-light: #cbccbc;
+    --accent-mid: #a2ac94;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 12pt 0pt;
+
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--medium);
+    border-radius: 5pt;
+}
+nav li {
+    margin: 0;
+    padding: 0;
+}
+nav a {
+    text-decoration: none;
+    color: white;
+    font-family: cutivemono;
+    padding: 0.5em 1em;
+    display: inline-block;
+}
+nav a:hover {
+    background-color: var(--dark);
+    border-radius: 5pt;
+}
+body {
+    font-size: 20pt;
+    background-color: whitesmoke;
+}
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20pt;
+    margin: 15pt 10pt;
+    font-family: "crimson";
+    align-items: start;
+}
+main img {
+    max-width: 100%;
+    height: auto;
+}
+main a {
+    text-align: center;
+    text-decoration: none;
+    color: var(--dark);
+    padding: 0.5em 1em;
+    display: inline-block;
+    background-color: var(--accent-light);
+    border-radius: 5pt;
+}
+main a:hover {
+    background-color: var(--accent-mid);
+    border-radius: 5pt;
+}
+.top-link {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 20pt;
+  }
+h1 {
+    font-size: 36pt;
+    color: var(--dark);
+    font-family: cutivemono;
+    text-align: center;
+    margin-top: 7pt;
+    margin-bottom: 7pt;
+}
+h2 {
+    font-family: lato;
+    font-size: 200%;
+    padding: 14pt;
+    color: var(--medium);
+    text-align: center;
+    background-color: var(--light);
+    border-radius: 15pt;
+}
+figcaption {
+    font-size: 12pt;
+    color: var(--accent-mid);
+}
+footer {
+    font-size: 12pt;
+    text-align: left;
+    background-color: var(--medium);
+    color: var(--accent-light);
+    padding: 10pt;
+    margin-top: 10pt;
+    font-family: lato;
+}
