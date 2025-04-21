@@ -41,7 +41,7 @@ nav a:hover {
 }
 body {
     font-size: 20pt;
-    background-color: whitesmoke;
+    background-color: gainsboro;
 }
 main {
     display: grid;
